@@ -1,4 +1,4 @@
-FROM  alpine:3.2
+FROM  alpine:3.7
 
 # ---------------- #
 #   Installation   #
@@ -16,7 +16,7 @@ RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca
         adduser -D -u 1000 -g 'www' www                                                                              &&\
         pip install -U pip pytz gunicorn six --no-cache-dir                                                          &&\
         npm install -g wizzy                                                                                         &&\
-        npm cache clean --force
+        npm cache clean --force 
 
 # Checkout the master branches of Graphite, Carbon and Whisper and install from there
 RUN     mkdir /src                                                                                                   &&\
