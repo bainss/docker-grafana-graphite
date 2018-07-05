@@ -48,14 +48,6 @@ RUN     mkdir /src/grafana                                                      
         tar -xzf /src/grafana.tar.gz -C /opt/grafana --strip-components=1                                            &&\
         rm /src/grafana.tar.gz
 
-# Install Locust
-RUN apk -U add ca-certificates python python-dev py-pip build-base && \
-    pip install locustio pyzmq && \
-    mkdir /locust
-
-
-WORKDIR /locust
-
 
 # Cleanup Compile Dependencies
 RUN     apk del --no-cache git curl wget gcc python-dev musl-dev libffi-dev
@@ -124,10 +116,6 @@ EXPOSE 81
 # Graphite Carbon port
 EXPOSE 2003
 
-# Locust.io ports 
-EXPOSE 8089 5557 5558
-
-ENTRYPOINT [ "/usr/bin/locust" ]
 
 
 # -------- #
