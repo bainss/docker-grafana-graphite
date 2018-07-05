@@ -6,7 +6,7 @@ FROM  alpine:3.7
 
 # Install all prerequisites
 RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca-certificates \
-                                    python-dev py-pip musl-dev libffi-dev cairo supervisor bash \
+                                    python-dev py-pip musl-dev libffi-dev cairo openrc supervisor bash \
                                     py-pyldap py-rrd                                                                 &&\
         wget -q -O /etc/apk/keys/sgerrand.rsa.pub \
                     https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub              &&\
