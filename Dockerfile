@@ -1,4 +1,4 @@
-FROM  alpine:3.2
+FROM  alpine
 
 # ---------------- #
 #   Installation   #
@@ -13,10 +13,11 @@ RUN     apk add --update --no-cache nginx nodejs nodejs-npm git curl wget gcc ca
         wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.26-r0/glibc-2.26-r0.apk                &&\
         apk add --no-cache  glibc-2.26-r0.apk                                                                        &&\
         rm glibc-2.26-r0.apk                                                                                         &&\
-        adduser -D -u 1000 -g 'www' www                                                                              &&\
-        pip install -U pip pytz gunicorn six --no-cache-dir                                                          &&\
+        adduser -D -u 1000 -g 'www' www                                                                              &&\ 
+	pip install --upgrade pip                                                                                    &&\
+        pip install -U pip pytz gunicorn six                                                                         &&\
         npm install -g wizzy                                                                                         &&\
-        npm cache clean --force 
+        npm cache clean --force  
 
 # Checkout the master branches of Graphite, Carbon and Whisper and install from there
 RUN     mkdir /src                                                                                                   &&\
@@ -32,7 +33,7 @@ RUN     git clone --depth=1 --branch master https://github.com/graphite-project/
 
 RUN     git clone --depth=1 --branch master https://github.com/graphite-project/graphite-web.git /src/graphite-web   &&\
         cd /src/graphite-web                                                                                         &&\
-        pip install . --no-cache-dir                                                                                 &&\
+        pip install .                                                                                 &&\
         python setup.py install                                                                                      &&\
         pip install -r requirements.txt --no-cache-dir                                                               &&\
         python check-dependencies.py
